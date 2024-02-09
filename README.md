@@ -4,7 +4,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">  
- <img src="https://github.com/ReactJS-Ashik/Echoo-ReactJS-Video-Conference-Application/assets/41672214/2087819d-0458-42b2-85f0-bcdb135cb478" />
+ <img src="https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/ddb2db58-2e00-4049-b40d-579f2976636a" />
+<!--  <img src="https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/d46dab71-c602-4ac5-b561-a44ff0a7ed15" /> -->
   <h3 align="center">
   
   # My Portfolio
@@ -91,13 +92,18 @@
 
 # Application first look:
 _Still under development_
-## Light Mode
+# Home Page
+![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/5947842b-2277-4015-83f4-39ca273c3cd4)
 
-## Dark Mode
+# Social Page
+![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/63cc8568-f186-4b01-9db3-4dbaf0255f79)
+
+
+
+
 
 
 ### Built With
-
 This section lists all the frameworks/libraries that I have used while developing this project. 
  
  | Full Stack                         | Styling                     | Tools                             |
