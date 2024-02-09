@@ -11,3 +11,43 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Organetto-Stretch';
+  src: url('/src/resources/fonts/organetto.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gunterz-Bold';
+  src: url('/src/resources/fonts/gunterz-bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bolderist-Bold';
+  src: url('/src/resources/fonts/Bolderist.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Outline-Font';
+  src: url('/src/resources/fonts/Lineat-III.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'StretchPro-Font';
+  src: url('/src/resources/fonts/StretchPro.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Brasika-Font';
+  src: url('/src/resources/fonts/Brasika.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Trophy-Font';
+  src: url('/src/resources/fonts/Trophy.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Crasey-Font';
+  src: url('/src/resources/fonts/CRASEY.otf') format('truetype');
+}

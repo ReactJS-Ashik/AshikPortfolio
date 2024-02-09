@@ -1,0 +1,14 @@
+.mediumHeaderData{
+    display: flex;
+    padding: 2%;
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border: 2px solid red;
+}
+
+.mediumArticleContainer{
+    display: flex;
+    flex-wrap: wrap;
+}

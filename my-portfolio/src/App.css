@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  cursor: url(/src/resources/svgs/cursors.png), auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+
+.flex-item-sideNav{
+  /* width: 14%; */
+  position: fixed;
+  height: 92%;
+  top: 0%;
+  padding-top: 3%;
+  /* height: 95.5vh; */
+  border-radius: 0px 25px 25px 0px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  padding: 2%;
+  /* box-shadow: 1px 0 70px -20px #FFC000; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.flex-item-sideNav:hover{
+  transition: all 0.3s ease-in-out;
+  /* width: 15%; */
+  padding-left: 3%;
+  /* height: 100vh; */
+  box-shadow: 1px 0 60px -30px #FFC000;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.noiseBG{
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+  background-image: url(/src/resources/Images/noise1.webp);
+  z-index: 999;
+  opacity: 0.15;
+  /* filter: invert(100); */
+  pointer-events: none; /* Allows interaction with underlying content */
 }
