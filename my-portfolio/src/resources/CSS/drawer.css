@@ -1,0 +1,51 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    /* border: 2px solid pink; */
+}
+
+.flex-item-homePage{
+    /* margin-left: 17%; */
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    padding-bottom: 3%;
+    /* border: 2px solid blue; */
+}
+
+
+.progressBarContianer{
+    z-index: 900;
+    margin: 0%;
+    width: 100%;
+    /* margin-left: 4%; */
+    position: fixed;
+    top: -1%
+}
+
+
+
+/* For cirlce overlay */
+.circle {
+    position: fixed;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid red;
+    background: black;
+    pointer-events: none; /* Ensure mouse events pass through to underlying elements */
+    transform: translate(-30%, -30%);
+    filter: drop-shadow(16px 16px 20px red) invert(75%);
+    opacity: 0.4;
+    pointer-events: none; /* Allows interaction with underlying content */
+  }
+  

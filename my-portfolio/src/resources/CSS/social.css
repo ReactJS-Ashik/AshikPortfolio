@@ -1,0 +1,138 @@
+/* Main Containers */
+.socialContainer{
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 80%;
+    /* border: 0.2px solid pink; */
+}
+.socialleftContainer{
+    width: 20%;
+    /* border: 0.2px solid green; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.socialtopContainer{
+    /* width: 20%; */
+    /* border: 0.2px solid green; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.socialrightContainer{
+    /* border: 0.2px solid blue; */
+    width: 20%;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Social Item Container */
+.SocialItemConainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    position: relative;
+}
+.SocialItem{
+    display: flex;
+    /* margin: 4% 0% 4% 0%;
+    padding: 1% 0% 1% 0%; */
+    padding: 0% 1% 0% 1%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+.SocialItem:hover, .activeSocialItem{
+    .SocialItem{
+        box-shadow: inset 5px 5px 20px rgba(0, 0, 0, 0.1);
+    };
+    .socialPhoto{
+        width: 70%;
+        opacity: 1;
+        filter: blur(0);
+        transition: all 0.5s ease-in-out;
+    };
+    img{
+        filter: blur(2px);
+        width: 100%;
+        transition: all 0.5s ease-in-out;
+    };
+    .socialText{
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+    }
+    .socialLink{
+        transition: all 0.3s ease-in-out;
+        border-bottom: 3px solid gray;
+    }
+}
+
+
+/* Item Properties */
+.socialText{
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+.socialLogoContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10%;
+}
+.socialLogoContainer img{
+    width: 50%;
+    transition: all 0.5s ease-in-out;
+}
+.socialPhoto{
+    border-radius: 10%;
+    width: 0%;
+    filter: blur(7px);
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+.socialPhoto:hover{
+    border-radius: 100%;
+    transition: all 0.5s ease-in-out;
+    transform: scale(1.1);
+}
+.centerGroup{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.socialLink{
+    transition: all 0.3s ease-in-out;
+}
+.centerDataZoom{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid teal; */
+}
+
+
+/* Selected Social Item's Data Container */
+.hideSocialDataContainer{
+    max-height: 100px;
+}
+.socialDataContainer{
+    margin-top: 2%;
+    display: block;
+    display: flex;
+    overflow: hidden;
+    border: 2px solid red;
+}

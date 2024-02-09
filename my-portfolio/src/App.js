@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, ThemeProvider, createTheme } from '@mui/material';
+import "./App.css"
+
+// Constants
+import { DarkTheme, LightTheme } from './Utils/ColorConstants';
+
+// Redux Imports
+import { useSelector } from 'react-redux';
+import MyDrawer from './Components/Drawer/Drawer';
 
 function App() {
+  const AppTheme= useSelector((state) => state.system.themeStyle)
+
+  // Define light and dark themes
+  const createLightTheme = createTheme({
+      palette: {
+          mode: LightTheme,
+      },
+  });
+  const createDarkTheme = createTheme({
+      palette: {
+          mode: DarkTheme,
+      },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={AppTheme === LightTheme ? createLightTheme : createDarkTheme} >
+      <Box>
+        <MyDrawer className="flex-item-sideNav"/>
+      </Box>
+      <Box className="noiseBG" />
+    </ThemeProvider>
   );
 }
 
