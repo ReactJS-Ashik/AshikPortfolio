@@ -43,8 +43,6 @@ const SocialItem = styled(Box, { shouldForwardProp: () => true })
             transition: 'all 0.3s ease-in-out',
             boxShadow: "inset 5px 5px 20px rgba(0, 0, 0, 0.1)",
             borderRadius: '7px 7px 7px 7px',
-            // transform: 'scale(1.1)',
-            // marginBottom: '1%',
         }
     })
 );
@@ -54,7 +52,6 @@ const SocialItem = styled(Box, { shouldForwardProp: () => true })
 export default function SocialComponent() {
 
     const [socialData, setsocialData]= useState(null)
-    const token= "2454a9e15b1adcf523e08db79d4fe91a0a0ce6a59464241f4b52bb49b92bfc12b"
     
     // Redux setup
     const activeSocialItem= useSelector((state) => state.activeNav.activeSocialMenu)
@@ -63,7 +60,7 @@ export default function SocialComponent() {
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const response = await getMediumUserData(token);
+                const response = await getMediumUserData();
                 setsocialData({"Medium": JSON.parse(response).data});
             } catch (error) {
                 setsocialData(null);

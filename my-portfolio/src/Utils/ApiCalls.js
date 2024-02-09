@@ -1,11 +1,9 @@
 import axios from "axios";
 
-const getMediumUserData= async (token) => {
+const getMediumUserData= async () => {
     try{
         const response= await axios.post("http://localhost:7700/api/v1/my-medium/userdata")
-        // const response= await axios.post("https://nexus3-render.onrender.com/api/v1/my-medium/userdata",{
-        //     "token": token
-        // })
+        // const response= await axios.post("https://nexus3-render.onrender.com/api/v1/my-medium/userdata")
         return JSON.stringify(response);
     } catch (error) {
         console.error("Error while getting the medium uset Data", error.response.data)
