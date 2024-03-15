@@ -52,12 +52,12 @@ export default function HomePage() {
                 <div className="topContainer fadeIn-riseRight" style={{marginLeft: '1%', marginTop: {sx: '5%', md: '10%'}}}>
                     <DownArrowAnimation direction={lrDirection}/>
                 </div>
-                <Typography variant='h1' sx={{display: { xs: 'none', md: 'block' },fontFamily: 'Bolderist-Bold'}} className="intro fadeIn-riseRight">HI THERE !</Typography>
-                <Typography variant='h4' sx={{display: { xs: 'block', md: 'none'},fontFamily: 'Bolderist-Bold'}} className="intro fadeIn-riseRight">HI THERE !</Typography>
-                <Typography variant='h1' sx={{display: { xs: 'none', md: 'flex'}, fontFamily: 'Bolderist-Bold'}} className="intro fadeIn-riseRight">I'M 
+                <Typography variant='h1' sx={{display: { xs: 'none', md: 'block' },fontFamily: 'Brasika-Font'}} className="intro fadeIn-riseRight">HI THERE !</Typography>
+                <Typography variant='h4' sx={{display: { xs: 'block', md: 'none'},fontFamily: 'Brasika-Font'}} className="intro fadeIn-riseRight">HI THERE !</Typography>
+                <Typography variant='h1' sx={{display: { xs: 'none', md: 'flex'}, fontFamily: 'Brasika-Font'}} className="intro fadeIn-riseRight">I'M 
                     <Typography variant='h1' className="highlight" sx={{fontFamily: 'Outline-Font'}} > ASHIK RAI</Typography>
                 </Typography>
-                <Typography variant='h4' sx={{display: { xs: 'flex', md: 'none'}, fontFamily: 'Bolderist-Bold'}} className="intro fadeIn-riseRight">I'M 
+                <Typography variant='h4' sx={{display: { xs: 'flex', md: 'none'}, fontFamily: 'Brasika-Font'}} className="intro fadeIn-riseRight">I'M 
                     <Typography variant='h5' className="highlight" sx={{fontFamily: 'Outline-Font'}} >ASHIK RAI</Typography>
                 </Typography>
                 <Box className="profession fadeIn-riseUp" >
