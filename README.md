@@ -28,7 +28,7 @@
 <br />
 <div align="center"> 
   <p>
-    <a href="https://github.com/ReactJS-Ashik/AshikPortfolio">View Demo</a>
+    <a href="https://main.d384ygdpe7u33b.amplifyapp.com/">View Demo</a>
     ·
     <a href="https://github.com/ReactJS-Ashik/AshikPortfolio/issues">Report Bug</a>
     ·
@@ -96,12 +96,19 @@ _Still under development_
 ![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/5947842b-2277-4015-83f4-39ca273c3cd4)
 
 # Social Page
-![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/63cc8568-f186-4b01-9db3-4dbaf0255f79)
+<!-- ![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/63cc8568-f186-4b01-9db3-4dbaf0255f79) -->
+![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/378bd08b-087d-4d8a-a6e9-8258452ef4de)
+
+# GitGub Profile
+![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/554d1974-e1da-433b-84c5-13e66a9da8b9)
 
 
 
 
 
+
+<br/>
+<br/>
 
 ### Built With
 This section lists all the frameworks/libraries that I have used while developing this project. 
