@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import MuiDrawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import { PropTypes } from 'prop-types';
-import { Avatar, Box, styled } from '@mui/material'
+import { Avatar, Box, Typography, styled } from '@mui/material'
 import { Progress } from 'antd';
 
 // importing CSS
@@ -13,7 +13,7 @@ import "../../resources/CSS/sharedComp.css"
 // importing Constants
 import { LightTheme, darkColour, darkColour_Shade1,
         lightColour } from "../../Utils/ColorConstants"
-import { sideNavMenus, smalldrawerWidth } from '../../Utils/Constants'
+import { closedrawerWidth, sideNavMenus, smalldrawerWidth } from '../../Utils/Constants'
 import { conicColors, yellowLove } from '../../Utils/ColorConstants';
 import SN_dp from "../../resources/Images/defaultDP.png"
 
@@ -25,6 +25,9 @@ import { setActiveSideNav, setProgressPercentage } from '../../Redux/Slicer';
 import HomePage from '../HomePage/HomePage';
 import SocialComponent from '../SocialComponent/SocialComponent';
 
+// importing icons
+import { CloseRounded, MenuRounded } from '@mui/icons-material';
+
 
 
 const openedMixin = (theme) => ({
@@ -34,6 +37,14 @@ const openedMixin = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: 'hidden',
+});
+const closedMixin = (theme) => ({
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: closedrawerWidth,
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -68,6 +79,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: () => true })(
     ...(open && {
       ...openedMixin(theme),
       '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
     }),
     '&:hover': {
         transition: 'all 0.3s ease-in-out',
@@ -154,8 +169,10 @@ export default function MyDrawer(props) {
     
     // Sate Variables
     // const [SN_dp, setSN_dp]= useState(defaultDP);
-    const open= true;
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [open, setOpen]= useState(true);
+    const [activePageIndex, setActivePageIndex]= useState(0)
+    // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const mousePosition = useRef(null);
 
     // Redux Operations
     const dispatch= useDispatch();
@@ -189,7 +206,10 @@ export default function MyDrawer(props) {
 
     // This section is for the mouse circle
     const handleMouseMove = (event) => {
-        setMousePosition({ x: event.clientX, y: event.clientY });
+        if (mousePosition.current) {
+            mousePosition.current.style.left = event.clientX + 'px';
+            mousePosition.current.style.top = event.clientY + 'px';
+        }
     };
 
 
@@ -204,18 +224,66 @@ export default function MyDrawer(props) {
         }
     };
 
+    const TriggerBtn= (index) => {
+        if (index === activePageIndex)
+            return;
+        setActivePageIndex(index)
+        const targetSection = document.getElementById("SideMenuBtn_"+index);
+        targetSection.click();
+        dispatch(setActiveSideNav({activeSideNav: sideNavMenus[index].title}))
+    }
+
     return (
-        <Box sx={{ display: 'flex'}} align="center" onMouseMove={handleMouseMove}>
+        <Box sx={{ display: 'flex'}} align="center" onMouseMove={handleMouseMove} >
+            <Box className="SideNavButton" sx={{display: 'flex', flexDirection: 'column'}} onClick={() => setOpen(!open)}>
+                <Box>
+                    <Avatar
+                        className="blob-animation"
+                        alt="Ashik Rai"
+                        src={SN_dp}
+                        sx={{ width: "75%", m: 0.5, height: "auto" }}
+                    />
+                </Box>
+                <Typography className={`${open ? 'hide' : null}`} variant='h5' sx={{fontFamily: "Brasika-Font", mb: 3}} >A.R</Typography>
+                <img width="35"
+                    className={`sideNaveMenuIcon ${open ? null : 'hide'}`}
+                    alt={`${sideNavMenus[activePageIndex].title}_icon`}
+                    src={sideNavMenus[activePageIndex].icon}
+                    style={{
+                        padding: '2.5%',
+                        justifySelf: 'flex-start',
+                        alignSelf: 'center'
+                    }}
+                />
+                <Box className="VerticalWriting flexRow" sx={{m: 1, flex: 1, alignSelf: 'center'}}>
+                    {
+                        open
+                        ? <CloseRounded sx={{transform: 'rotate(90deg)', color: 'white', opacity: 0.7, pr: 0.5}} />
+                        : <MenuRounded sx={{transform: 'rotate(90deg)', color: 'white', opacity: 0.7, pr: 0.5}} />
+                    }
+                    <Typography
+                        className={`${open ? 'hide' : null}`}
+                        sx={{fontWeight: 'bolder', color: 'white', fontFamily: 'Organetto-Stretch', textAlign: 'left'}}
+                    >
+                        {sideNavMenus[activePageIndex].title}
+                    </Typography>
+                </Box>
+            </Box>
             <CssBaseline />
             <Drawer variant="permanent" open={open} sx={{display: { xs: 'none', md: 'block' }}}>
                 <DrawerHeader className="fadeIn-riseUpshort" >
-                    <Box align="center" style={{marginTop: "14%"}}>
+                    <Box align="center" sx={{position: 'relative',marginTop: "14%"}}>
                         <Avatar
                             className="blob-animation"
-                            alt="Remy Sharp"
+                            alt="Ashik Rai"
                             src={SN_dp}
                             sx={{ width: "75%", height: "auto" }}
                         />
+                        {/* <Box sx={{position: 'absolute', p: 0.5, top: 0, right: 5, background: '#eee8f7', borderRadius: '7px'}} onClick={() => setOpen(!open)} >
+                            <IconButton size='small'>
+                                <CloseRounded fontSize='medium'/>
+                            </IconButton>
+                        </Box> */}
                     </Box>
                 </DrawerHeader>
 
@@ -223,7 +291,7 @@ export default function MyDrawer(props) {
                     {
                         sideNavMenus.map((data, index) => {
                             return(
-                            <SideMenuItem className="fadeIn-riseUp" key={index} onClick={ () => handleButtonClick(`Component_${index+1}`)} >
+                            <SideMenuItem id={`SideMenuBtn_${index}`} className="fadeIn-riseUp" key={index} onClick={ () => handleButtonClick(`Component_${index+1}`)} >
                                 {data.icon && 
                                     <img width="50"
                                         className="sideNaveMenuIcon"
@@ -248,38 +316,56 @@ export default function MyDrawer(props) {
 
             </Drawer>
 
-            <DrawerContainer component="main" >
-                <div>
+            <DrawerContainer component="main">
+                <Box>
                     <DrawerHeader />
                     <DrawerContent>
+                        <Box className="stickyContainer" sx={{width: {sx: '80%', md: '40%'}}}>
+                            <Box className="CodeContainer">
+                                <Typography variant='p' className="TypeWriter monospace big-caret lorem">
+                                    Stay updated on my latest projects and professionsal insights by connecting with me on <b> GitHub, LinkedIn, Medium, </b> and other social platforms.
+                                </Typography>
+                            </Box>
+                        </Box>
                         <Box className="flex-container">        
                             <Box className="flex-item-homePage">
-                                <div className="progressBarContianer">
+                                <Box className="progressBarContianer">
                                     <Progress percent={percentage} strokeColor={conicColors} showInfo={false} />
+                                </Box>
+                                <Box id="Component_1" onMouseOver={() => TriggerBtn(0)}>
+                                    <HomePage />
+                                </Box>
+                                <div onMouseOver={() => TriggerBtn(1)}>
+                                    <Box id="Component_2" style={{background: '#eee8f7'}} >
+                                        { activePageIndex >= 1 ?
+                                            <SocialComponent/> : <Box className="fullSizeContainer" />
+                                        }
+                                    </Box>
                                 </div>
-                                <div id="Component_1">
-                                    <SocialComponent/>
+
+                                <div onMouseOver={() => TriggerBtn(2)}>
+                                    <Box id="Component_3">
+                                        { activePageIndex >= 2 ?
+                                            <HomePage/> : <Box className="fullSizeContainer" />
+                                        }
+                                    </Box>
                                 </div>
-                                <div id="Component_2">
-                                    <HomePage/>
-                                </div>
-                                <div id="Component_3">
-                                    <HomePage/>
-                                </div>
-                                <div id="Component_4">
-                                    <HomePage/>
-                                </div>
-                                <div id="Component_5">
-                                    <HomePage/>
+
+                                <div onMouseOver={() => TriggerBtn(3)}>
+                                    <Box id="Component_4">
+                                        { activePageIndex >= 3 ?
+                                            <HomePage/> : <Box className="fullSizeContainer" />
+                                        }
+                                    </Box>
                                 </div>
                             </Box>
                         </Box>
                     </DrawerContent>
-                </div>
+                </Box>
             </DrawerContainer>
 
             
-            <Box className="circle" sx={{ display: {xs : 'none', md: 'block'}, left: mousePosition.x, top: mousePosition.y }} />
+            <Box className="circle" sx={{ display: {xs : 'none', md: 'block'}}} ref={mousePosition} />
         </Box>
     );
 }

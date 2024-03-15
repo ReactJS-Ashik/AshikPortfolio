@@ -23,6 +23,7 @@
 .purpleGrad{
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(184,190,221,1), rgba(0, 0, 0, 0));
 }
+/* Gradiant Colors Ends Here */
 
 
 
@@ -64,6 +65,7 @@
     from {opacity: 1}
     to {opacity:0}
 }
+/* arrow Down Animation Ends Here*/
 
 
 
@@ -107,6 +109,13 @@
     from {opacity: 0; filter: blur(2px); transform: translateX(-25%);}
     to {opacity: 1; filter: blur(0)}
 }
+.fadeIn-riseRightShort{
+    animation: 2s fadeInriseRightShort ease-in-out;
+}
+@keyframes fadeInriseRightShort {
+    from {opacity: 0; filter: blur(2px); transform: translateX(-5%);}
+    to {opacity: 1; filter: blur(0)}
+}
 .scaleXY{
     transition: all 0.3s ease-in-out;
 }
@@ -115,12 +124,13 @@
     transition: all 0.3s ease-in-out;
 }
 
+/* animations classes Ends Here */
+
 
 /* Blob Animation */
 .blob-animation{
     animation:blobs 20s ease-in-out infinite alternate
 }
-
 @keyframes blobs{
 	0%{border-radius:26% 74% 61% 39% / 54% 67% 33% 46%}
 	10%{border-radius:54% 26% 47% 53% / 68% 46% 54% 32%}
@@ -134,67 +144,389 @@
 	90%{border-radius:25% 75% 70% 30% / 39% 50% 50% 61%}
 	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
 }
+/* Blob Animation Ends Here */
 
-/* Type writed effect */
+
+/* Type writer effect */
+/* .TypeWriter{ */
+    /* overflow: hidden; Ensures the content is not revealed until the animation */
+    /* border-right: .15em solid orange; The typwriter cursor */
+    /* white-space: nowrap; Keeps the content on a single line */
+    /* margin: 0 auto; Gives that scrolling effect as the typing happens */
+    /* letter-spacing: .15em; Adjust as needed */
+    /* animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+} */
+
+
+.stickyContainer{
+    position: sticky;
+    top: 7px;
+    z-index: 999;
+    /* top: 5%; */
+    border: 2px solid red;
+    background-color: red;
+    border-radius: 4px;
+}
+
+
+
+/* TyeWriter Animation */
+.CodeContainer{
+    padding: 2%;
+    /* margin: 4% 0% 4% 0%; */
+    margin-left: 4%;
+    /* border: 7px solid red; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    /* left: 0;
+    padding: 1rem; */
+    /* position: absolute; */
+    /* top: 1rem; */
+    width: 100%;
+    overflow: hidden;
+    --lineHeight: 1.5rem;
+}
+.SmallCodeContainer{
+    padding: 2%;
+    /* margin: 4% 0% 4% 0%; */
+    margin-left: 4%;
+    /* border: 7px solid red; */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    font-size: 80%;
+    overflow: hidden;
+    --lineHeight: 1rem;
+}
+.TypeWriter{
+    /* border-right: .15em solid orange; */
+    /* --bgColor: white; */
+    --lines: 500;
+    /* --lineHeight: 1.5rem; */
+    --timePerLine: 2s;
+    --widthCh: 70;
+    --width: calc(var(--widthCh));
+    /* --width: calc(var(--widthCh) * 1ch); */
+    /* do not touch the time property!!! */
+    --time: calc(var(--lines) * var(--timePerLine));
+    
+    /* background: var(--bgColor);   */
+    line-height: var(--lineHeight);
+    max-height: var(--lineHeight);
+    overflow: hidden;
+    position: relative;
+    width: var(--width);
+    
+    animation:  blink-caret .75s step-end infinite,
+                grow var(--time) steps(var(--lines));
+    animation-fill-mode: forwards;
+}
+.TypeWriter::before {
+    content: "";
+    animation: 
+      type var(--timePerLine) linear infinite, 
+      carriageReturn var(--time) steps(var(--lines)) var(--lines),
+      caret 0.5s steps(2) infinite;
+    background: var(--bgColor);
+    border-left: 2px solid;
+    bottom: 0;
+    height: 2rem;
+    position: absolute;
+    right: 0;
+    width: 100%;
+}
+.TypeWriter.big-caret::before {
+    border-left-width: 1ch;
+}
+.TypeWriter.monospace::before {
+    animation: 
+      type var(--timePerLine) steps(var(--widthCh)) infinite, 
+      carriageReturn var(--time) steps(var(--lines)) var(--lines),
+      caret 0.5s steps(2) infinite;
+}
+.lorem {
+  --widthCh: 60;
+  --timePerLine: 6s;
+}
+@keyframes grow {
+    0% { max-height: var(--lineHeight); }
+    100% { max-height: calc(var(--lineHeight) * var(--lines)); }
+}
+@keyframes carriageReturn {
+    0% { top: 0; }
+    100% { top: calc(var(--lineHeight) * var(--lines)); }
+}
+@keyframes type {
+    0% { width: 100%; }
+    100% { width: 0%; }
+}
+@keyframes caret {
+    0% { color: var(--bgColor); }
+    100% { color: black; }
+}
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+}
+
 .typewriter {
     overflow: hidden; /* Hide overflow characters */
     border-right: .15em solid orange; /* Typing cursor */
     white-space: nowrap; /* Prevent line breaks */
     font-size: 1.5em; /* Adjust font size as needed */
     animation: typewriter 3s steps(40) infinite; /* Typewriter animation */
-  }
-  
-  @keyframes typewriter {
+}
+@keyframes typewriter {
     from {
       width: 0; /* Start from no width */
     }
     to {
       width: 100%; /* Finish with full width */
     }
-  }
+}
+/* TyeWriter Animation Ends Here */
 
 
+ /* Hide Show */
 .hide{
     display: none;
+    animation: fadeOut 3s ease-in-out; /* Typewriter animation */
 }
-
+@keyframes fadeOut {
+    from {
+        opacity: 1; 
+        filter: blur(0px);
+    }
+    to {
+        opacity: 0;
+        filter: blur(7px);
+    }
+}
 .show{
     display: block;
 }
+/* Hide Show Ends Here */
 
-
-  /* Font Css */
-  
+/* Font Css */ 
 .Organetto-Stretch{
     font-family: 'Organetto-Stretch';
     opacity: 0.5;
-}
-  
+}  
 .Gunterz-Bold{
     font-family: Gunterz-Bold;
-}
-  
+}  
 .Bolderist-Bold {
     font-family: Bolderist-Bold;
-}
-  
+}  
 .Outline-Font {
     font-family: 'Outline-Font';
-}
-  
+}  
 .StretchPro-Font{
     font-family: 'StretchPro-Font';
-}
-  
+}  
 .Brasika-Font {
     font-family: 'Brasika-Font';
 }
-  
 .Trophy-Font {
     font-family: 'Trophy-Font';
-}
-  
+}  
 .Crasey-Font {
     font-family: 'Crasey-Font';
 }
+.smallFont90{
+    font-size: 90%;
+}
+.smallFont75{
+    font-size: 75%;
+}
+/* Font Css Ends Here */
   
+
+.open-socialProfile{
+    overflow: hidden;
+}
+
+.GradContainer{
+    background: linear-gradient(to bottom, rgba(129, 178, 154, 0.5), rgba(61, 64, 91, 1), rgba(0, 0, 0, 0.5));
+}
+.onFaceContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    /* padding: 2%;
+    top: 4%;
+    left: 4%;
+    height: 92%;
+    width: 92%; */
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* background-color: gray; */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent white background */
+}
+
+.Truncate{
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Display ellipsis (...) when text overflows */
+}
+
+
+/* Flex shared layouts */
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+.flexRowVCenter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.flexColumn{
+    display: flex;
+    flex-direction: column;    
+}
+/* Flex shared Ends Here layouts */
+
+.marginUpBottom{
+    margin: var(--margin-amount, 4px) 0% var(--margin-amount, 4px) 0%;
+}
+
+
+
+
+/* Custom ScrollBar */
+/* Define styles for the scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-small-scrollbar::-webkit-scrollbar{
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track, .custom-small-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb, .custom-small-scrollbar::-webkit-scrollbar-thumb{
+    background: linear-gradient(#FFC000 0%, #dc2f02 70%, #9d0208 100%);
+    border-radius: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover, .custom-small-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+/* Custom ScrollBar Ends Here*/
+
+
+/* Skeleton */
+.SkeletonContainer{
+    width: 100%;
+    border-radius: 14px 14px 14px 14px;
+    padding: 0.2%;
+    /* border: 1px solid rgba(129, 123, 123, 0.5); */
+    /* background: rgb(151, 147, 147); */
+    /* background: linear-gradient(#FFC000 0%, #dc2f02 70%, #9d0208 100%); */
+}
+
+
+/* OptionTextButton */
+.socialProfileActions:active, .activesocialProfileActions{
+    /* overflow: hidden; */
+    .icon{
+        animation: heartButton 1s;
+    }
+    .option-2{
+        transform: translate(0px,0%);
+        opacity: 1;
+    }
+    .option-1{
+        transform: translate(0px,100%);
+        opacity: 0;
+    }
+}
+.optionContainer{
+    position: relative;
+    overflow: hidden;
+}
+.optionContainer .option-1{
+    transition: all .5s;
+    transform: translate(0%);
+    opacity: 1;
+    position: relative;
+}
+.optionContainer .option-2{
+    transition: all .5s;
+    position: absolute;
+    top: 0%;
+    transform: translate(0px,-150%);
+    opacity: 0;
+}
+/* OptionTextButton Ends Here */
+
+/* HeartBeat Animation Icon */
+.heartBeatIcon{
+    animation: heartButton 1s;
+}
+@keyframes heartButton {
+    0% {
+     transform: scale(1);
+    }
+   
+    25% {
+     transform: scale(1.15);
+    }
+   
+    50% {
+     transform: scale(1);
+    }
+   
+    75% {
+     transform: scale(1.15);
+    }
+   
+    100% {
+     transform: scale(1);
+    }
+}
+/* HeartBeat Animation Icon Ended */
+
+/* FireWords Animation */
+.fireworkDiv{
+    position: absolute;
+    border: 2px solid transparent;
+    /* width: 20%;
+    height: 20%; */
+    animation: firework 1.4s ease forwards 0.1s;
+}
+@keyframes firework {
+    0% {
+      opacity: 1;
+      box-shadow: 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0, 0 0 0 -2px #4f29f0;
+    }
+  
+    30% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+      box-shadow: 0 -15px 0 0px #4f29f0, 14px -8px 0 0px #4f29f0, 14px 8px 0 0px #4f29f0, 0 15px 0 0px #4f29f0, -14px 8px 0 0px #4f29f0, -14px -8px 0 0px #4f29f0;
+    }
+}
+/* FireWords Animation Ends Here */
+   
+
+/* Full Size Div */
+.fullSizeContainer{
+    height: 100vh;
+    width: 100vw;
+}

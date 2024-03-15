@@ -6,8 +6,9 @@ import { Avatar, Box, Typography } from '@mui/material';
 import { getMediumUserArticleData } from '../../../Utils/ApiCalls';
 import "../../../resources/CSS/mediumPage.css"
 import "../../../resources/CSS/sharedComp.css"
+import useKeyListener from '../../../Utils/KeyListener';
 
-export default function MediumPageComponent() {
+export default function MediumPageComponent(props) {
     const mediumData= useSelector((state) => state.activeNav.activeSocialMenu)
     const [articleData, setarticleData]= useState(null);
     
@@ -22,7 +23,11 @@ export default function MediumPageComponent() {
         };
         fetchData();
     }, []);
-    
+
+    const closeSocialProfile = () => {props.callback(null)}
+    useKeyListener(closeSocialProfile, 'Escape');
+
+
     if (articleData) {
         return (
             <Box sx={{display: 'flex', width: '100%', flexDirection: 'column', flex: 1}}>
