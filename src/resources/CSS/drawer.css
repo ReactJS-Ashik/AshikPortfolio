@@ -1,10 +1,10 @@
 .flex-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    /* border: 2px solid pink; */
+    /* border: 4px solid pink; */
 }
 
 .flex-item-homePage{
@@ -40,12 +40,36 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 2px solid red;
-    background: black;
+    /* border: 2px solid red; */
+    /* background: black; */
     pointer-events: none; /* Ensure mouse events pass through to underlying elements */
-    transform: translate(-30%, -30%);
-    filter: drop-shadow(16px 16px 20px red) invert(75%);
-    opacity: 0.4;
+    transform: translate(-40%, -40%);
+    /* filter: drop-shadow(16px 16px 20px red) invert(75%); */
+    /* opacity: 0.5; */
     pointer-events: none; /* Allows interaction with underlying content */
+    backdrop-filter: blur(1.5px);
+    /* background-color: greenyellow; */
+    background: white;
+    /* mix-blend-mode: saturation; */
+    mix-blend-mode: exclusion;
   }
   
+
+  .SideNavButton{
+    position: fixed;
+    top: 43%;
+    right: 0%;
+    background: linear-gradient(to bottom, #FFC000, #dc2f02, #9d0208);
+    border-radius: 4px;
+    padding: 0.5%;
+    width: 4%;
+    /* height: 27%; */
+    z-index: 999;
+    transition: all 0.2s ease-in-out;
+  }
+  .SideNavButton:hover{
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+    right: 0.2%;
+    box-shadow: 1px 0 60px -30px rgb(44, 44, 44);
+  }
