@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import MuiDrawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import { PropTypes } from 'prop-types';
-import { Avatar, Box, Typography, styled } from '@mui/material'
+import { Avatar, Box, Typography, styled, useMediaQuery } from '@mui/material'
 import { Progress } from 'antd';
 
 // importing CSS
@@ -24,6 +24,9 @@ import { setActiveSideNav, setProgressPercentage } from '../../Redux/Slicer';
 // importing components
 import HomePage from '../HomePage/HomePage';
 import SocialComponent from '../SocialComponent/SocialComponent';
+import MyDashboardComponent from '../Dashboard/myDashboardComponent';
+import TypeWriterContent from '../../Utils/TypeWriterContent';
+import MySmallDashBoardComponent from '../Dashboard/mySmallDashBoardComponent';
 
 // importing icons
 import { CloseRounded, MenuRounded } from '@mui/icons-material';
@@ -46,6 +49,33 @@ const closedMixin = (theme) => ({
     overflowX: 'hidden',
     width: closedrawerWidth,
 });
+const Drawer = styled(MuiDrawer, { shouldForwardProp: () => true })(
+    ({ theme, open }) => ({
+      // height: '100dvh',
+      // flexShrink: 0,
+      // whiteSpace: 'nowrap',
+      // boxSizing: 'border-box',
+      // border: '2px solid red',
+      display: 'flex',
+      zIndex: 999,
+      transition: "0.3s all ease-in-out",
+      ...(open && {
+        ...openedMixin(theme),
+        '& .MuiDrawer-paper': openedMixin(theme),
+      }),
+      ...(!open && {
+        ...closedMixin(theme),
+        '& .MuiDrawer-paper': closedMixin(theme),
+      }),
+      '&:hover': {
+          transition: 'all 0.3s ease-in-out',
+          /* width: 15%; */
+          paddingLeft: '3%',
+          /* height: 100dvh; */
+          boxShadow: `1px 0 60px -30px ${yellowLove}`
+      }
+    }),
+);
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -59,7 +89,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const DrawerContainer = styled(Box)(({ theme}) => ({
     backgroundColor: theme.palette.mode ===  LightTheme ? lightColour: darkColour,
 //   flexGrow: 1,
-//   height: '100vh',
+//   height: '100dvh',
     width: '100%',
     overflowY: 'auto',
     overflowX: 'hidden',
@@ -67,32 +97,6 @@ const DrawerContainer = styled(Box)(({ theme}) => ({
 //   borderLeft: theme.palette.mode === LightTheme ? `3px solid ${grayColor}` : '3px solid red',
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: () => true })(
-  ({ theme, open }) => ({
-    // height: '100vh',
-    // flexShrink: 0,
-    // whiteSpace: 'nowrap',
-    // boxSizing: 'border-box',
-    display: 'flex',
-    zIndex: 999,
-    transition: "0.3s all ease-in-out",
-    ...(open && {
-      ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
-    }),
-    '&:hover': {
-        transition: 'all 0.3s ease-in-out',
-        /* width: 15%; */
-        paddingLeft: '3%',
-        /* height: 100vh; */
-        boxShadow: `1px 0 60px -30px ${yellowLove}`
-    }
-  }),
-);
 
 
 const DrawerContent = styled(Box, {
@@ -169,10 +173,11 @@ export default function MyDrawer(props) {
     
     // Sate Variables
     // const [SN_dp, setSN_dp]= useState(defaultDP);
-    const [open, setOpen]= useState(true);
+    const [open, setOpen]= useState(false);
     const [activePageIndex, setActivePageIndex]= useState(0)
     // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const mousePosition = useRef(null);
+    const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm')); // Change 'sm' to other breakpoints as needed
 
     // Redux Operations
     const dispatch= useDispatch();
@@ -182,7 +187,6 @@ export default function MyDrawer(props) {
         dispatch(setActiveSideNav({activeSideNav: sideNavMenus[0].title}))
     }, [])
 
-    
     const percentage= useSelector((state) => state.system.progressPercentage);
 
     // This useEffect section is for the Progress bar
@@ -215,12 +219,15 @@ export default function MyDrawer(props) {
 
     // Scroll to particular View
     // Function to handle button click and scroll to the target element
-    const handleButtonClick = (sectionId) => {
+    const handleButtonClick = (sectionId, index) => {
         // Check if the target element exists
+        console.log("index",index)
         const targetSection = document.getElementById(sectionId);
+        dispatch(setActiveSideNav({activeSideNav: sideNavMenus[index].title}))
         // Scroll to the target section
         if (targetSection) {
             targetSection.scrollIntoView({ behavior: 'smooth' });
+            setActivePageIndex(index)
         }
     };
 
@@ -228,14 +235,21 @@ export default function MyDrawer(props) {
         if (index === activePageIndex)
             return;
         setActivePageIndex(index)
-        const targetSection = document.getElementById("SideMenuBtn_"+index);
-        targetSection.click();
+        const targetSectionBtn = document.getElementById("SideMenuBtn_"+index);
+        targetSectionBtn.click();
+
+        const targetSection = document.getElementById("Component_"+index);
+        // Scroll to the target section
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
         dispatch(setActiveSideNav({activeSideNav: sideNavMenus[index].title}))
     }
 
     return (
         <Box sx={{ display: 'flex'}} align="center" onMouseMove={handleMouseMove} >
-            <Box className="SideNavButton" sx={{display: 'flex', flexDirection: 'column'}} onClick={() => setOpen(!open)}>
+            <Box className={`${open ? "openSideNavButton" : "closeSideNavButton"} ${isSmallScreen ? "SideNavButton-sm" : "SideNavButton"}`} sx={{display: 'flex', flexDirection: 'column'}} onClick={() => setOpen(!open)}>
                 <Box>
                     <Avatar
                         className="blob-animation"
@@ -244,18 +258,20 @@ export default function MyDrawer(props) {
                         sx={{ width: "75%", m: 0.5, height: "auto" }}
                     />
                 </Box>
-                <Typography className={`${open ? 'hide' : null}`} variant='h5' sx={{fontFamily: "Brasika-Font", mb: 3}} >A.R</Typography>
-                <img width="35"
+                <Typography className={`${open ? 'hide' : null}`} variant={isSmallScreen ? 'p' : 'h5'} sx={{fontFamily: "Brasika-Font", mb: 3}} >A.R</Typography>
+                <img
+                    // width="35"
                     className={`sideNaveMenuIcon ${open ? null : 'hide'}`}
                     alt={`${sideNavMenus[activePageIndex].title}_icon`}
                     src={sideNavMenus[activePageIndex].icon}
                     style={{
-                        padding: '2.5%',
+                        width: isSmallScreen ? '90%' : '70%',
+                        padding: isSmallScreen ? '0%' : '2.5%',
                         justifySelf: 'flex-start',
                         alignSelf: 'center'
                     }}
                 />
-                <Box className="VerticalWriting flexRow" sx={{m: 1, flex: 1, alignSelf: 'center'}}>
+                <Box className="VerticalWriting flexRow" sx={{m: isSmallScreen ? 1 : 0, flex: 1, alignSelf: 'center'}}>
                     {
                         open
                         ? <CloseRounded sx={{transform: 'rotate(90deg)', color: 'white', opacity: 0.7, pr: 0.5}} />
@@ -291,7 +307,7 @@ export default function MyDrawer(props) {
                     {
                         sideNavMenus.map((data, index) => {
                             return(
-                            <SideMenuItem id={`SideMenuBtn_${index}`} className="fadeIn-riseUp" key={index} onClick={ () => handleButtonClick(`Component_${index+1}`)} >
+                            <SideMenuItem id={`SideMenuBtn_${index}`} className="fadeIn-riseUp" key={index} onClick={ () => handleButtonClick(`Component_${index}`, index)} >
                                 {data.icon && 
                                     <img width="50"
                                         className="sideNaveMenuIcon"
@@ -304,7 +320,7 @@ export default function MyDrawer(props) {
                                         }} 
                                     />
                                 }
-                                <ItemTitle active={activeSideNav===data.title ? activeSideNav : null} onClick={()=> dispatch(setActiveSideNav({activeSideNav: data.title}))}>
+                                <ItemTitle active={activeSideNav===data.title ? activeSideNav : null}>
                                     {data.title}
                                 </ItemTitle>
                             </SideMenuItem>
@@ -318,13 +334,23 @@ export default function MyDrawer(props) {
 
             <DrawerContainer component="main">
                 <Box>
-                    <DrawerHeader />
+                    {/* <DrawerHeader /> */}
                     <DrawerContent>
-                        <Box className="stickyContainer" sx={{width: {sx: '80%', md: '40%'}}}>
-                            <Box className="CodeContainer">
-                                <Typography variant='p' className="TypeWriter monospace big-caret lorem">
-                                    Stay updated on my latest projects and professionsal insights by connecting with me on <b> GitHub, LinkedIn, Medium, </b> and other social platforms.
-                                </Typography>
+                        <Box
+                            className={`
+                                ${activePageIndex === 0
+                                ?
+                                    open ? "centerStickyContainer": "centerStickyContainer-expand"
+                                :   open ? "stickyContainer" : "stickyContainer-expand"
+                                }`
+                            }
+                            sx={{width: {sx: '80%', md: '40%'}}}
+                        >
+                            <Box className="MainContainer">
+                                <Box className={`${isSmallScreen? "SmallCodeContainerBG":"CodeContainerBG"}`} />
+                                <Box className={`${isSmallScreen? "SmallCodeContainer":"CodeContainer"}`}>
+                                    <TypeWriterContent content={activePageIndex} isSmallScreen={isSmallScreen}/>
+                                </Box>
                             </Box>
                         </Box>
                         <Box className="flex-container">        
@@ -332,26 +358,33 @@ export default function MyDrawer(props) {
                                 <Box className="progressBarContianer">
                                     <Progress percent={percentage} strokeColor={conicColors} showInfo={false} />
                                 </Box>
-                                <Box id="Component_1" onMouseOver={() => TriggerBtn(0)}>
-                                    <HomePage />
+                                <Box id="Component_0" onMouseOver={() => TriggerBtn(0)}>
+                                    {isSmallScreen ? <MySmallDashBoardComponent /> : <MyDashboardComponent /> }
                                 </Box>
                                 <div onMouseOver={() => TriggerBtn(1)}>
-                                    <Box id="Component_2" style={{background: '#eee8f7'}} >
+                                    <Box id="Component_1" style={{background: '#eee8f7'}} >
                                         { activePageIndex >= 1 ?
-                                            <SocialComponent/> : <Box className="fullSizeContainer" />
+                                            <HomePage /> : <Box className="fullSizeContainer" />
                                         }
                                     </Box>
                                 </div>
 
                                 <div onMouseOver={() => TriggerBtn(2)}>
-                                    <Box id="Component_3">
+                                    <Box id="Component_2">
                                         { activePageIndex >= 2 ?
-                                            <HomePage/> : <Box className="fullSizeContainer" />
+                                            <SocialComponent/> : <Box className="fullSizeContainer" />
                                         }
                                     </Box>
                                 </div>
 
                                 <div onMouseOver={() => TriggerBtn(3)}>
+                                    <Box id="Component_3" style={{background: '#eee8f7'}}>
+                                        { activePageIndex >= 3 ?
+                                            <HomePage/> : <Box className="fullSizeContainer" />
+                                        }
+                                    </Box>
+                                </div>
+                                <div onMouseOver={() => TriggerBtn(4)}>
                                     <Box id="Component_4">
                                         { activePageIndex >= 3 ?
                                             <HomePage/> : <Box className="fullSizeContainer" />

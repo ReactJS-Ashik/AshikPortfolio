@@ -123,7 +123,7 @@ export default function SocialComponent() {
             </Box>
         )
     return (
-        <Box sx={{width: '100%', height: '100vh', display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{width: '100%', height: '100dvh', display: 'flex', justifyContent: 'center'}}>
             <Container>
                 <Box className="socialleftContainer fadeIn-riseRight">
                     {/* <Typography variant="h5" sx={{display: { xs: 'none', md: 'block' }, fontFamily: 'Organetto-Stretch'}} className="VerticalWriting"> SOCIAL </Typography> */}

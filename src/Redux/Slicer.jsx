@@ -4,7 +4,7 @@ import { LightTheme } from "../Utils/ColorConstants";
 const initialState={
     system:{
         themeStyle: LightTheme,
-        progressPercentage: 10.0,
+        progressPercentage: 9.0,
     },
     activeNav:{
         activePage: "",
