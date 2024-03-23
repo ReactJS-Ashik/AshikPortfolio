@@ -15,16 +15,24 @@ import PinterestText from "../resources/Images/pinterest.png"
 
 export const sideNavMenus= [
     {title: "Home", link: "my-home", icon: house},
+    {title: "Bio", link: "my-bio", icon: house},
     {title: "Social", link: "my-social-profile", icon: social},
     {title: "Experience", link: "my-experience", icon: exp},
     {title: "Projects", link: "my-projects", icon: projects},
 ]
 
+export const socialLinks= {
+    pinterest: "https://in.pinterest.com/ashikthulungrai7/",
+    medium: "https://medium.com/@ashikthulungrai7",
+    github: "https://github.com/ashikrai",
+    linkedin: "https://www.linkedin.com/in/ashik-rai/",
+}
+
 export const socialComponentItems= [
-    {title: "Medium", link: "https://medium.com/@ashikthulungrai7", logo: MediumLogo, logoText: MediumText, color: 'purple'},
-    {title: "GitHub", link: "https://github.com/ashikrai", logo: GitHubLogo, logoText: GitHubText, color: 'green'},
-    {title: "LinkedIn", link: "https://www.linkedin.com/in/ashik-rai/", logo: LinkedInLogo, logoText: LinkedInText, color: 'blue'},
-    {title: "Pinterest", link: "https://in.pinterest.com/ashikthulungrai7/", logo: PinterestLogo, logoText: PinterestText, color: 'pink'},
+    {title: "Medium", link: socialLinks["medium"], logo: MediumLogo, logoText: MediumText, color: 'purple'},
+    {title: "GitHub", link: socialLinks["github"], logo: GitHubLogo, logoText: GitHubText, color: 'green'},
+    {title: "LinkedIn", link: socialLinks["linkedin"], logo: LinkedInLogo, logoText: LinkedInText, color: 'blue'},
+    {title: "Pinterest", link: socialLinks["pinterest"], logo: PinterestLogo, logoText: PinterestText, color: 'pink'},
 ]
 
 

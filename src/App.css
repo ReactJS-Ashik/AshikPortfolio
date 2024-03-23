@@ -25,7 +25,7 @@ body {
   transition: all 0.3s ease-in-out;
   /* width: 15%; */
   padding-left: 3%;
-  /* height: 100vh; */
+  /* height: 100dvh; */
   box-shadow: 1px 0 60px -30px #FFC000;
 }
 
@@ -38,7 +38,8 @@ body {
   /* background-color: red; */
   background-image: url(/src/resources/Images/noise1.webp);
   z-index: 999;
-  opacity: 0.15;
+  opacity: 0.3;
+  mix-blend-mode: multiply;
   /* filter: invert(100); */
   pointer-events: none; /* Allows interaction with underlying content */
 }
