@@ -23,7 +23,7 @@
 
 
 .progressBarContianer{
-    z-index: 900;
+    z-index: 500;
     margin: 0%;
     width: 100%;
     /* margin-left: 4%; */
@@ -35,29 +35,42 @@
 
 /* For cirlce overlay */
 .circle {
+    --circleSize: 70px;
     position: fixed;
     z-index: 999;
-    width: 50px;
-    height: 50px;
+    width: var(--circleSize);
+    height: var(--circleSize);
     border-radius: 50%;
-    /* border: 2px solid red; */
-    /* background: black; */
     pointer-events: none; /* Ensure mouse events pass through to underlying elements */
     transform: translate(-40%, -40%);
     /* filter: drop-shadow(16px 16px 20px red) invert(75%); */
-    /* opacity: 0.5; */
     pointer-events: none; /* Allows interaction with underlying content */
     backdrop-filter: blur(1.5px);
-    /* background-color: greenyellow; */
+    -webkit-backdrop-filter: blur(1.5px);
     background: white;
     /* mix-blend-mode: saturation; */
     mix-blend-mode: exclusion;
   }
   
-
-  .SideNavButton{
-    position: fixed;
+.openSideNavButton{
     top: 43%;
+}
+.closeSideNavButton{
+    top: 35%;
+}
+.SideNavButton-sm{
+    position: fixed;
+    right: 0%;
+    background: linear-gradient(to bottom, #FFC000, #dc2f02, #9d0208);
+    border-radius: 4px;
+    padding: 0.5%;
+    width: 10%;
+    /* height: 27%; */
+    z-index: 999;
+    transition: all 0.2s ease-in-out;
+}
+.SideNavButton{
+    position: fixed;
     right: 0%;
     background: linear-gradient(to bottom, #FFC000, #dc2f02, #9d0208);
     border-radius: 4px;
@@ -66,10 +79,10 @@
     /* height: 27%; */
     z-index: 999;
     transition: all 0.2s ease-in-out;
-  }
-  .SideNavButton:hover{
+}
+.SideNavButton:hover{
     transition: all 0.2s ease-in-out;
     transform: scale(1.1);
     right: 0.2%;
     box-shadow: 1px 0 60px -30px rgb(44, 44, 44);
-  }
+}

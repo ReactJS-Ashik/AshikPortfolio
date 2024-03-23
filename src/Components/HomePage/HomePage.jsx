@@ -17,11 +17,11 @@ import { bio, lrDirection, udDirection } from '../../Utils/Constants';
 
 const Container = styled('div')(() => ({
     display: 'flex',
-    margin: '4% 0% 4% 0%',
+    // margin: '4% 0% 4% 0%',
     padding: '1% 0% 1% 0%',
     // border: '2px solid red',
     width: '100%',
-    height: '80vh',
+    height: '100vh',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

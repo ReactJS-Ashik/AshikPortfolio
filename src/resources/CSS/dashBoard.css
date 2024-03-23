@@ -1,0 +1,59 @@
+.DashboardContainer{
+    width: 100% !important;
+    /* height: 100% !important; */
+    /* height: 100dvh !important; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* border: 5px solid red */
+}
+
+.imageContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* justify-items: center;
+    align-content: center; */
+    position: relative;
+    /* width: 100%; */
+    /* border: 12px solid green; */
+}
+
+.imageContainer .pDB_Image{
+    width: 100%;
+    /* aspect-ratio:  16 / 8; */
+    object-fit: cover;
+    height: 100dvh;
+    /* border: 2px solid black; */
+}
+.imageContainer .pDB_Image_effect{
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(83, 82, 82, 0.7), black);
+    mix-blend-mode: multiply;
+    height: 50%;
+    bottom: 0%;
+    width: 100%;
+    /* border: 80px solid red; */
+}
+
+.DashboardContainer .DashboardData{
+    position: absolute;
+    top: 0%;
+    padding: 2.5%;
+    width: 100%;
+    border: 2px solid transparent;
+    height: 50%;
+    transition: all 0.3s ease-in;
+}
+.HeaderData{
+    display: flex;
+    float: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.headerTitle{
+    border: 2px solid red;
+    font-family: 'StretchPro-Font' ;
+}

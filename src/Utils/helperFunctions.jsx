@@ -88,3 +88,8 @@ export const sendGitHubProfileLinkAsMail= (userData) => {
     // `
     sendMail(null, recipient, subject, body);
 }
+
+export const openLink = (link) => {
+    if (link)
+        window.open(link, '_blank');
+}
