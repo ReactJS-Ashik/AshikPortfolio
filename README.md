@@ -91,15 +91,20 @@
   </table>
 
 # Application first look:
-_Still under development_
+_Still under development
+#Dashboard
+<img src="https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/3245c2f1-ede1-4cee-9f96-9c414aaf046f" />
+ 
 # Home Page
-![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/5947842b-2277-4015-83f4-39ca273c3cd4)
+<!-- ![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/5947842b-2277-4015-83f4-39ca273c3cd4) -->
+![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/13b253b1-1724-4ba7-914d-dbc3d4b8516e)
+
 
 # Social Page
 <!-- ![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/63cc8568-f186-4b01-9db3-4dbaf0255f79) -->
 ![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/378bd08b-087d-4d8a-a6e9-8258452ef4de)
 
-# GitGub Profile
+# GitGub Profile (Real Time Data: using Oktokit)
 ![image](https://github.com/ReactJS-Ashik/AshikPortfolio/assets/41672214/554d1974-e1da-433b-84c5-13e66a9da8b9)
 
 
