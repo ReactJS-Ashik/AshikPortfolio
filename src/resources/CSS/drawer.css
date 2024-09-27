@@ -19,6 +19,9 @@
     align-items: center;
     padding-bottom: 3%;
     /* border: 2px solid blue; */
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
 }
 
 

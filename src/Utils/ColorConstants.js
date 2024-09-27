@@ -22,3 +22,4 @@ export const transparent            = 'transparent'
 
 export const twoColors = { '0%': '#108ee9', '100%': '#87d068' };
 export const conicColors = { '0%': '#FFC000', '70%': '#dc2f02', '100%': '#9d0208' };
+export const conicColorsDark = { '0%': '#FFC000', '70%': '#dc2f02', '100%': '#9d0208' };

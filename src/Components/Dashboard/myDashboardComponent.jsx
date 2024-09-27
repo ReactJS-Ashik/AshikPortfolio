@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { Box, Typography } from '@mui/material'
 
@@ -7,15 +7,18 @@ import "../../resources/CSS/dashBoard.css"
 import "../../resources/CSS/sharedComp.css"
 
 // importing immages
-import pDBImg from "../../resources/Images/portfolio_dboard_img.png"
-import { socialLinks } from '../../Utils/Constants'
+import pDBImg from "../../resources/Images/portfolio banner.png"
+// import { socialLinks } from '../../Utils/Constants'
 import { openLink } from '../../Utils/helperFunctions'
 
 export default function MyDashboardComponent() {
   const Header= [
     {title: "PPoortffolioo", link: null},
     {title: "aashhikk RRaai", link: null},
-    {title: "Beehindd_PPixLL", link: socialLinks["pinterest"]}]
+    // {title: "Beehindd_PPixLL", link: socialLinks["pinterest"]}
+  ]
+
+
   return (
     <Box className="DashboardContainer">
         <Box className="imageContainer">
@@ -30,7 +33,6 @@ export default function MyDashboardComponent() {
                   className="fadeIn-riseRightShort whiteText"
                   variant='h5'
                   sx={{
-                    opacity: 0.8,
                     cursor: 'pointer',
                     fontFamily: 'StretchPro-Font'
                   }}

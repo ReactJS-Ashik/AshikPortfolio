@@ -7,14 +7,15 @@ import "../../resources/CSS/dashBoard.css"
 import "../../resources/CSS/sharedComp.css"
 
 // importing immages
-import pDBImg from "../../resources/Images/portfolio_sm-dboard_img.jpg"
-import { socialLinks } from '../../Utils/Constants'
+import pDBImg from "../../resources/Images/portfolio banner sm.png"
+// import { socialLinks } from '../../Utils/Constants'
 
 export default function MySmallDashBoardComponent() {
   const Header= [
     {title: "PPoortffolioo", link: ""},
     {title: "aashhikk RRaai", link: ""},
-    {title: "Beehindd_PPixLL", link: socialLinks["pinterest"]}]
+    // {title: "Beehindd_PPixLL", link: socialLinks["pinterest"]}
+  ]
   return (
     <Box className="DashboardContainer">
         <Box className="imageContainer">

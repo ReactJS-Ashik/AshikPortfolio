@@ -16,7 +16,7 @@ export default function TypeWriterContent(props) {
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                      Greetings❗ I am
                      <color className="left-margin-by-1 orangeText right-margin-by-1"> Ashik Rai, </color>
-                     and I extend
+                     {/* and I extend */}
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                 </Typography>
 
@@ -29,7 +29,7 @@ export default function TypeWriterContent(props) {
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                     a warm Welcome to my
                     <color className="orangeText left-margin-by-1 right-margin-by-1"> Portfolio. </color>
-                    Here, you can freely
+                    {/* Here, you can freely */}
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                 </Typography>
 
@@ -43,7 +43,7 @@ export default function TypeWriterContent(props) {
                         <color className="orangeText right-margin-by-1">
                             Explore my works and projects.
                         </color>
-                        Dont hesitate to connect with me.
+                        {/* Dont hesitate to connect with me. */}
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                     <caret className="caret" />
                 </Typography>
@@ -62,8 +62,9 @@ export default function TypeWriterContent(props) {
                     <big>01 </big>
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                      I am a
-                     <color className="left-margin-by-1 orangeText right-margin-by-1"> Software Engineer</color>
-                     with industrial experience
+                     <color className="left-margin-by-1 orangeText right-margin-by-1"> 
+                        Software Engineer 🧑‍💻
+                    </color>
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                 </Typography>
 
@@ -74,8 +75,8 @@ export default function TypeWriterContent(props) {
                 >
                     <big>02 </big>
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
-                     as a <color className="orangeText left-margin-by-1 right-margin-by-1"> Full Stack Developer 🧑‍💻, Android Developer</color>
-                     with experience on
+                        currently working at <color className="orangeText left-margin-by-1 right-margin-by-1"> AMADEUS </color>
+                        {/* with experience on */}
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                 </Typography>
 
@@ -86,10 +87,11 @@ export default function TypeWriterContent(props) {
                 >
                     <big>03 </big>
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`} />
-                        tools such as
+                        {/* tools such as */}
+                        also an enthusiast
                         <color className="left-margin-by-1 orangeText right-margin-by-1">
-                            C++, Python, Git, Node Red ....
-                        </color> etc.
+                            Full Stack Developer
+                        </color>
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                     <caret className="caret" />
                 </Typography>
@@ -107,7 +109,7 @@ export default function TypeWriterContent(props) {
                 >
                     <big>01 </big>
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
-                    Stay updated on my <color className="left-margin-by-1 orangeText"> latest projects </color>
+                    Stay updated with my <color className="left-margin-by-1 orangeText"> Medium Blogs </color>
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                 </Typography>
 
@@ -118,7 +120,8 @@ export default function TypeWriterContent(props) {
                 >
                     <big>02 </big>
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
-                    and <color className="orangeText left-margin-by-1 right-margin-by-1"> professionsal  </color>insights by connecting with me on
+                    and <color className="orangeText left-margin-by-1 right-margin-by-1"> latest projects  </color>
+                    posted on GitHub
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                 </Typography>
 
@@ -130,9 +133,9 @@ export default function TypeWriterContent(props) {
                     <big>03 </big>
                     <ChevronLeftRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`} />
                         <color className="orangeText right-margin-by-1">
-                            GitHub, LinkedIn, Medium,
+                            Lets Connect, 
                         </color>
-                        and other social platforms.
+                        over social Hubs.
                     <ChevronRightRounded fontSize={`${props.isSmallScreen ? 'small':'medium'}`}/>
                     <caret className="caret" />
                 </Typography>
