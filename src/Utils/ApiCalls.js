@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const hostType= "https://nexus3-render.onrender.com"
-const hostType= "http://localhost:7700"
+const hostType= "https://nexus3-render.onrender.com"
+// const hostType= "http://localhost:7700"
 const API_Version= "v1"
 
 // Github API calls

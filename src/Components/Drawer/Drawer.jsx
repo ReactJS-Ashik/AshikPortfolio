@@ -51,11 +51,6 @@ const closedMixin = (theme) => ({
 });
 const Drawer = styled(MuiDrawer, { shouldForwardProp: () => true })(
     ({ theme, open }) => ({
-      // height: '100dvh',
-      // flexShrink: 0,
-      // whiteSpace: 'nowrap',
-      // boxSizing: 'border-box',
-      // border: '2px solid red',
       display: 'flex',
       zIndex: 999,
       transition: "0.3s all ease-in-out",
@@ -69,9 +64,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: () => true })(
       }),
       '&:hover': {
           transition: 'all 0.3s ease-in-out',
-          /* width: 15%; */
           paddingLeft: '3%',
-          /* height: 100dvh; */
           boxShadow: `1px 0 60px -30px ${yellowLove}`
       }
     }),
@@ -88,13 +81,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const DrawerContainer = styled(Box)(({ theme}) => ({
     backgroundColor: theme.palette.mode ===  LightTheme ? lightColour: darkColour,
-//   flexGrow: 1,
-//   height: '100dvh',
     width: '100%',
     overflowY: 'auto',
     overflowX: 'hidden',
-    // border: '5px solid red',
-//   borderLeft: theme.palette.mode === LightTheme ? `3px solid ${grayColor}` : '3px solid red',
+    background: 'black',
 }));
 
 
@@ -128,7 +118,6 @@ const SideMenuItem = styled('div')(() => ({
     alignItems: 'center',
     flexDirection: "row",
     padding: "2%",
-    // margin: "2%",
     width: '100%',
     '&:hover .sideNaveMenuIcon': {
         width: "24%",
@@ -183,29 +172,95 @@ export default function MyDrawer(props) {
     const dispatch= useDispatch();
     const activeSideNav= useSelector((state) => state.activeNav.activeSideNav)
     
-    useEffect(() => {
-        dispatch(setActiveSideNav({activeSideNav: sideNavMenus[0].title}))
-    }, [])
-
     const percentage= useSelector((state) => state.system.progressPercentage);
 
     // This useEffect section is for the Progress bar
-    useEffect(() => {
-        const handleScroll = () => {
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            const scrollTop = window.scrollY;
-            const trackLength = documentHeight - windowHeight;
-            const scrollPercentage = (scrollTop / trackLength) * 100;
-            if (scrollPercentage > percentage)
-                dispatch(setProgressPercentage({progressPercentage: scrollPercentage }));
-        };
-        window.addEventListener('scroll', handleScroll);
+    const handleScrollforProgressBar = () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
+        const trackLength = documentHeight - windowHeight;
+        const scrollPercentage = (scrollTop / trackLength) * 100;
+        if (scrollPercentage > percentage)
+            dispatch(setProgressPercentage({progressPercentage: scrollPercentage }));
+    };
+    const setupProgressBar= ()=>{
+        window.addEventListener('scroll', handleScrollforProgressBar);
+    }
 
+    
+    // This is for scaling the first components on scroll
+    const refElement= useRef(null)
+    var scaleValue= useRef(1.0)
+    var heightValue= useRef(0)
+    var prevScrollY= useRef(0)
+
+    const handleDashboardScroll = () => {
+      const scrollPosition = window.scrollY;
+      if(scrollPosition > prevScrollY.current){
+        if (scrollPosition > 100 && scrollPosition < 1000) { 
+          scaleValue.current-=  0.02
+          heightValue.current+= 2.5;
+        }
+      }else{
+        if(scrollPosition > 0){
+          scaleValue.current+=  0.02
+          heightValue.current-= 2.5;
+        }
+        else if(scrollPosition === 0){
+          scaleValue.current= 1
+          heightValue.current= 0;
+        }
+        if(scaleValue.current > 1)
+          scaleValue.current= 1
+      }
+    //   refElement.current.style.height= `${100-heightValue.current}vh`
+      refElement.current.style.transform= `scale(${scaleValue.current})`
+      refElement.current.style.opacity= scaleValue.current
+      prevScrollY.current= scrollPosition
+    };
+    const setupDashBoard= ()=>{        
+  
+      window.addEventListener('scroll', handleDashboardScroll);
+    }
+
+    useEffect(() => {
+        dispatch(setActiveSideNav({activeSideNav: sideNavMenus[0].title}))
+        setupProgressBar();
+        setupDashBoard();
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', handleScrollforProgressBar);
+            window.removeEventListener('scroll', handleDashboardScroll);
         };
-    }, []);
+    }, [])
+
+      
+
+    // This section handles the component render when visible
+    const ViewRefs= useRef([])
+    useEffect(()=>{
+        const observer= new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    const index= entry.target.getAttribute('data-index')
+                    TriggerBtn(index)
+                    console.log(`Component ${entry.target.getAttribute('data-index')} is Visible`)
+                }
+            });
+        },{
+            threshold: 0.4
+        });
+        ViewRefs.current.forEach(element => {
+            if(element)
+                observer.observe(element)
+        });
+        return()=>{
+            ViewRefs.current.forEach(element => {
+                if(element)
+                    observer.unobserve(element)
+            });
+        }
+    },[]) 
 
 
     // This section is for the mouse circle
@@ -236,13 +291,14 @@ export default function MyDrawer(props) {
             return;
         setActivePageIndex(index)
         const targetSectionBtn = document.getElementById("SideMenuBtn_"+index);
-        targetSectionBtn.click();
+        if(targetSectionBtn)
+            targetSectionBtn.click();
 
-        const targetSection = document.getElementById("Component_"+index);
-        // Scroll to the target section
-        if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        // const targetSection = document.getElementById("Component_"+index);
+        // // Scroll to the target section
+        // if (targetSection) {
+            // targetSection.scrollIntoView({ behavior: 'smooth' });
+        // }
 
         dispatch(setActiveSideNav({activeSideNav: sideNavMenus[index].title}))
     }
@@ -335,16 +391,20 @@ export default function MyDrawer(props) {
             <DrawerContainer component="main">
                 <Box>
                     {/* <DrawerHeader /> */}
-                    <DrawerContent>
+                    <DrawerContent  sx={{background: 'transparent'}}>
                         <Box
-                            className={`
-                                ${activePageIndex === 0
-                                ?
-                                    open ? "centerStickyContainer": "centerStickyContainer-expand"
-                                :   open ? "stickyContainer" : "stickyContainer-expand"
-                                }`
-                            }
-                            sx={{width: {sx: '80%', md: '40%'}}}
+                            className={ activePageIndex === 0 ? `fadeIn-riseUp ${open ? " centerStickyContainer " : "centerStickyContainer-expand"}` : "hide"}
+                        >
+                            <Box className="MainContainer">
+                                <Box className={`${isSmallScreen? "SmallCodeContainerBG":"CodeContainerBG"}`} />
+                                <Box className={`${isSmallScreen? "SmallCodeContainer":"CodeContainer"}`}>
+                                    <TypeWriterContent content={activePageIndex} isSmallScreen={isSmallScreen}/>
+                                </Box>
+                            </Box>
+                        </Box>
+                        
+                        <Box
+                            className={ activePageIndex > 0 ? `fadeIn-riseUp ${open ? "stickyContainer" : "stickyContainer-expand"}`: "hide"}
                         >
                             <Box className="MainContainer">
                                 <Box className={`${isSmallScreen? "SmallCodeContainerBG":"CodeContainerBG"}`} />
@@ -358,39 +418,24 @@ export default function MyDrawer(props) {
                                 <Box className="progressBarContianer">
                                     <Progress percent={percentage} strokeColor={conicColors} showInfo={false} />
                                 </Box>
-                                <Box id="Component_0" onMouseOver={() => TriggerBtn(0)}>
+                                <Box id="Component_0" sx={{overflow: 'hidden'}} data-index={0} ref={(elem) => {refElement.current= elem; ViewRefs.current[0]= elem}}>
                                     {isSmallScreen ? <MySmallDashBoardComponent /> : <MyDashboardComponent /> }
                                 </Box>
-                                <div onMouseOver={() => TriggerBtn(1)}>
-                                    <Box id="Component_1" style={{background: '#eee8f7'}} >
-                                        { activePageIndex >= 1 ?
-                                            <HomePage /> : <Box className="fullSizeContainer" />
-                                        }
-                                    </Box>
-                                </div>
-
-                                <div onMouseOver={() => TriggerBtn(2)}>
-                                    <Box id="Component_2">
-                                        { activePageIndex >= 2 ?
-                                            <SocialComponent/> : <Box className="fullSizeContainer" />
-                                        }
-                                    </Box>
-                                </div>
-
-                                <div onMouseOver={() => TriggerBtn(3)}>
-                                    <Box id="Component_3" style={{background: '#eee8f7'}}>
-                                        { activePageIndex >= 3 ?
-                                            <HomePage/> : <Box className="fullSizeContainer" />
-                                        }
-                                    </Box>
-                                </div>
-                                <div onMouseOver={() => TriggerBtn(4)}>
-                                    <Box id="Component_4">
-                                        { activePageIndex >= 3 ?
-                                            <HomePage/> : <Box className="fullSizeContainer" />
-                                        }
-                                    </Box>
-                                </div>
+                                <Box id="Component_1" data-index={1} ref={(elem) => ViewRefs.current[1]= elem}>
+                                    { activePageIndex >= 1 ?
+                                        <HomePage /> : <Box className="fullSizeContainer" />
+                                    }
+                                </Box>
+                                <Box sx={{background: 'white'}} id="Component_2" data-index={2} ref={(elem) => ViewRefs.current[2]= elem}>
+                                    { activePageIndex >= 2 ?
+                                        <SocialComponent /> : <Box className="fullSizeContainer" />
+                                    }
+                                </Box>
+                                <Box id="Component_3" data-index={3} ref={(elem) => ViewRefs.current[3]= elem}>
+                                    { activePageIndex >= 3 ?
+                                        <HomePage /> : <Box className="fullSizeContainer" />
+                                    }
+                                </Box>
                             </Box>
                         </Box>
                     </DrawerContent>
